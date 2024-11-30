@@ -11,15 +11,22 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded( { extended: true } ));
+const authRouter = require('./routers/authRouter.js');
+
+
 
 //connect to mongoose
-
-mongoose.connect(process.env.MONGO_URL).then(() => {
+mongoose
+.connect(process.env.MONGO_URL).then(() => {
   console.log( "connecting to Datbase...");
 }).catch((err )=>{
 
      console.l0g(err);
 });
+
+// use the router config
+app.use( '/api/auth' , authRouter);
+
 
 app.get('/' , (req , res) => {
     res.json({message: "hello world!"});
