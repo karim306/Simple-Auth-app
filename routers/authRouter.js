@@ -1,12 +1,12 @@
 const express = require('express');
-
+const authController = require('../controllers/authController');
 const router = express.Router();
 
 
 
-router.post('/signup' , (req , res )=> {
-    res.json({ message :"Sign up success"})
-})
+router.post('/signup' ,authController.signup ) 
+    
+
 
 
 
