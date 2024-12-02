@@ -5,10 +5,12 @@ const router = express.Router();
 
 // console.log('Request Body:', req.body);
 router.post('/signup' ,authController.signup ,(req ,res)=>{
-    console.log('Request Body:', req.body);
+   // console.log('Request Body:', req.body); tetsing
 } ) 
     
-
+router.post('/signin' ,authController.signin ,(req ,res)=>{
+    // console.log('Request Body:', req.body); tetsing
+ } ) 
 
 
 
