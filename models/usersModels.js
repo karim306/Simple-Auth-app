@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
         trim: true,
         required: [true, 'Email is required'],
         unique: [true, 'Email must be unique'],
-        minlength: [4, 'Email must be 4 characters'],
+        minlength: [6, 'Email must be 4 characters'],
         lowercase: true
     },
     password: {

@@ -3,8 +3,10 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 
-
-router.post('/signup' ,authController.signup ) 
+// console.log('Request Body:', req.body);
+router.post('/signup' ,authController.signup ,(req ,res)=>{
+    console.log('Request Body:', req.body);
+} ) 
     
 
 

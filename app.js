@@ -18,10 +18,10 @@ const authRouter = require('./routers/authRouter.js');
 //connect to mongoose
 mongoose
 .connect(process.env.MONGO_URL).then(() => {
-  console.log( "connecting to Datbase...");
+  console.log( "Connected to Datbase...");
 }).catch((err )=>{
 
-     console.l0g(err);
+     console.log(err);
 });
 
 // use the router config
