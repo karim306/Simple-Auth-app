@@ -12,6 +12,8 @@ router.post('/signin' ,authController.signin ,(req ,res)=>{
     // console.log('Request Body:', req.body); tetsing
  } ) 
 
-
+ router.post('/signout' ,authController.signout ,(req ,res)=>{
+    // console.log('Request Body:', req.body); tetsing
+ } ) 
 
 module.exports = router;
