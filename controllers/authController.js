@@ -8,7 +8,7 @@ const {
 } = require('../middlewares/validator');
 const User = require('../models/usersModels');
 const { doHash, doHashValidation, hmacProcess } = require('../utils/hashing');
-
+const transport = require('../middlewares/sendMails');
 
 exports.signup = async (req, res) => {
 	const { email, password } = req.body;
@@ -118,8 +118,9 @@ exports.sendVerificationCode = async (req, res) => {
 				.status(400)
 				.json({ success: false, message: 'You are already verified!' });
 		}
-
+		// console.log('Test:', transport);
 		const codeValue = Math.floor(Math.random() * 1000000).toString();
+		
 		let info = await transport.sendMail({
 			from: process.env.NODE_CODE_SENDING_EMAIL_ADDRESS,
 			to: existingUser.email,

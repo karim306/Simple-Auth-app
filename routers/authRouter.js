@@ -1,20 +1,16 @@
 const express = require('express');
 const authController = require('../controllers/authController');
+
 const router = express.Router();
 
+router.post('/signup', authController.signup);
+router.post('/signin', authController.signin);
+router.post('/signout',  authController.signout);
 
-// console.log('Request Body:', req.body);
-router.post('/signup' ,authController.signup ,(req ,res)=>{
-   // console.log('Request Body:', req.body); tetsing
-} ) 
-    
-router.post('/signin' ,authController.signin ,(req ,res)=>{
-    // console.log('Request Body:', req.body); tetsing
- } ) 
-
- router.post('/signout' ,authController.signout ,(req ,res)=>{
-    // console.log('Request Body:', req.body); tetsing
- } ) 
- router.patch('/send-verfication-code' , authController.sendVerificationCode)
+router.patch(
+	'/send-verification-code',
+	
+	authController.sendVerificationCode
+);
 
 module.exports = router;
