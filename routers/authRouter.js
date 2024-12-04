@@ -15,5 +15,6 @@ router.post('/signin' ,authController.signin ,(req ,res)=>{
  router.post('/signout' ,authController.signout ,(req ,res)=>{
     // console.log('Request Body:', req.body); tetsing
  } ) 
+ router.patch('/send-verfication-code' , authController.sendVerificationCode)
 
 module.exports = router;
