@@ -36,3 +36,13 @@ exports.acceptCodeSchema = Joi.object({
 		}),
 	providedCode: Joi.number().required(),
 });
+
+exports.changePasswordSchema = Joi.object({
+   newPassword: Joi.string()
+   .required()
+   .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*d).{8,}$')), //For Testing
+   oldPassword: Joi.string()
+   .required()
+   .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*d).{8,}$')),
+
+});

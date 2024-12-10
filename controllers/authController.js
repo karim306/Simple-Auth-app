@@ -205,3 +205,44 @@ exports.verifyVerificationCode = async (req, res) => {
 		console.log(error);
 	}
 };
+exports.changePassword = async ( req , res ) =>{
+	const { userId , verfied} = req.user ; 
+	const { oldPassword , newPassword} = req.body ; 
+
+	
+	try {
+		const { error, value } = changePasswordSchema.validate({ oldPassword, newPassword });
+		if (error) {
+			return res
+				.status(401)
+				.json({ success: false, message: error.details[0].message });
+		}
+		if(!verfied){
+			return res
+                .status(401)
+                .json({ success: false, message: 'Please verify your account first!' });
+		}
+		const existingUser = await User.findById({_id:userId}).select('+password');
+		if (!existingUser) {
+			return res
+				.status(401)
+				.json({ success: false, message: 'User does not exists!' });
+		}
+		const result  = await doHashValidation(oldPassword , existingUser.password)
+		if(!result){
+			return res
+                .status(401)
+                .json({ success: false, message: 'Invalid credentials!' });
+		}
+		const hashedPassword = await doHash(newPassword, 12);
+		existingUser.password = hashedPassword;
+		await existingUser.save();
+		
+		res.status(200)
+		.json({ success: true, message: 'Password has been changed successfully!' });
+	} catch (error) {
+		console.log(error);
+	}
+
+
+};
