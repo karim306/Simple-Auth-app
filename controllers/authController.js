@@ -156,7 +156,7 @@ exports.verifyVerificationCode = async (req, res) => {
 
 		const codeValue = providedCode.toString();
 		const existingUser = await User.findOne({ email }).select(
-			'+verificationCode +verfiyVerficationCode'
+			'+verfiyVerficationCode +verificationCode '
 		);
 
 		if (!existingUser) {
@@ -170,10 +170,8 @@ exports.verifyVerificationCode = async (req, res) => {
 				.json({ success: false, message: 'you are already verified!' });
 		}
 
-		if (
-			!existingUser.verificationCode ||
-			!existingUser.verificationCodeValidation
-		) {
+		if (!existingUser.verificationCode ||
+			!existingUser.verificationCodeValidation) {
 			return res
 				.status(400)
 				.json({ success: false, message: 'something is wrong with the code!' });
@@ -192,8 +190,9 @@ exports.verifyVerificationCode = async (req, res) => {
 
 		if (hashedCodeValue === existingUser.verificationCode) {
 			existingUser.verified = true;
-			existingUser.verificationCode = undefined;
 			existingUser.verificationCodeValidation = undefined;
+			existingUser.verificationCode = undefined;
+			
 			await existingUser.save();
 			return res
 				.status(200)
