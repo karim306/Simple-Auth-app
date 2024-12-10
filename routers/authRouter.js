@@ -16,7 +16,7 @@ router.patch(
 router.patch(
 	'/verify-verification-code',
 	
-	authController.verfiyVerficationCode
+	authController.verifyVerificationCode
 );
 
 
